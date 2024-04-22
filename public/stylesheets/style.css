@@ -1,0 +1,180 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 0px 0px;
+  margin: 0px;
+  background-color: #F6F8FC;
+}
+:root{
+  --top-padding: 20px
+}
+a {
+  display: flex;
+  width: 100%;
+}
+button.active{
+  background-color: white;
+  color: #233047;
+  border-radius: 5px;
+}
+.margin-left{
+  margin-left: auto;
+}
+a:hover{
+  text-decoration: none;
+}
+ul{
+  list-style-type: none;
+  margin: 0px;
+  padding-left: 0px;
+}
+.nav-btn{
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  color: white;
+  background-color: transparent;
+  border: none;
+}
+.nav-btn:hover{
+  background-color: white;
+  color: #233047;
+  border-radius: 5px;
+}
+.col-sm-2{
+  padding: 5vh var(--top-padding);
+  color: white;
+  background-color: #233047;
+  min-height: 100vh;
+}
+.col-sm-10{
+  padding-top: var(--top-padding);
+  min-height: 100vh;
+  padding-bottom: 2rem;
+}
+.update-controls{
+  display: flex;
+  max-width: min-content;
+  gap: 1rem;
+}
+.btn-primary{
+  background-color: #233047;
+}
+.btn-primary:hover{
+  background-color: #374c71;
+}
+.btn-danger{
+  background-color: #cc3333;
+}
+.btn-danger:hover{
+  background-color: #952929;
+}
+.btn-primary:active,
+.btn-danger:active{
+  scale: 0.95;
+}
+
+/* VIEWS */
+
+/* PET_LIST */
+.pet-container,
+.category-container{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.pet-li,
+.category-li{
+  display: flex;
+  font-size: 18px;
+  box-sizing: border-box;
+  border: 2px solid lightgray;
+  gap: 1rem;
+}
+.pet-li:hover,
+.category-li:hover{
+  background-color: lightgray;
+}
+.pet-controls,
+.category-controls{
+  display: flex;
+  gap: 1rem;
+}
+.pet-btn,
+.category-btn{
+  padding: 1rem;
+  background-color: inherit;
+  border: none;
+}
+.pet-update-btn,
+.category-update-btn{
+  padding: 1rem;
+  background-color: inherit;
+  border: none;
+}
+.pet-delete-btn,
+.category-delete-btn{
+  padding: 1rem;
+  border: none;
+}
+.pet-update-btn:active,
+.pet-delete-btn:active{
+  scale: 0.95;
+}
+/* \PET_LIST */
+
+/* ITEMS */
+.items-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.item-content{
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+.item{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 500px;
+  overflow: hidden;
+  border: 2px solid lightgray;
+  padding: 1rem 1rem;
+  gap: 1rem;
+}
+.item-informations-container{
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.item-img{
+  width: 250px;
+  height: auto; /* Allows the image to scale proportionally */
+  max-height: 350px;
+  object-fit: cover;
+}
+.a-item-remove{
+  width: min-content;
+  display: flex;
+  margin-left: auto !important;
+}
+.item-forms{
+  display: flex;
+  margin-top: auto;
+  align-items: end;
+  justify-content: end;
+  max-height: fit-content;
+  min-height: fit-content;
+  border-top: 2px solid lightgray;
+  padding-top: 1rem;
+  gap: 1rem;
+}
+.a-item-update{
+  height: 100%;
+  width: fit-content;
+}
+
+/* \ITEMS */

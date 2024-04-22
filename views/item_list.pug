@@ -1,0 +1,45 @@
+extends layout
+
+block content
+  h1= title 
+  <br>
+
+  if item_list.length
+    div(class='items-container')
+      each item in item_list
+        div(class='item')
+          div(class='item-content')
+            div(class='placeholder-image-container')
+              img(src="/images/cat-placeholder-img.jpg", alt="Placeholder image", class='item-img')
+            div(class='item-informations-container')
+              h4 #{item.name}
+              p #[strong Description: ]#{item.description}
+              p #[strong Price: ]#{item.price} $
+              p #[strong In stock: ]#{item.inStock}
+              p #[strong For animals: ]
+              ol 
+                each pet in item.for 
+                  li #{pet.name}
+              p #[strong Food categories: ]
+              ol 
+                each category in item.category 
+                  li #{category.name}
+          div(class='item-forms')
+            a(href=item.url+'/update', class='a-item-update')
+              button.btn.btn-primary Update
+            form(method='POST', action=`${item.url}/delete`)
+              a(href=item.url+'/delete', class='a-item-remove')
+                button.btn.btn-primary(type='submit', class='category-delete-btn btn-danger') Remove
+
+
+    //-       button(class='category-btn') #{category.name}
+    //-       div(class='margin-left category-controls') 
+    //-         a(href=category.url+'/update')
+    //-           button.btn.btn-primary Update
+
+    //-   a(href='/catalog/categories/new-category')
+    //-     button.btn.btn-primary Add new category
+  else 
+    p There are no items to display. How about adding some?
+    a(href='/catalog/items/new-item')
+      button.btn.btn-primary Add new category

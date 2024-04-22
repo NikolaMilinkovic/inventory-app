@@ -1,0 +1,9 @@
+extends layout 
+
+block content 
+
+  p Do you really want to delete #{pet.name} entry?
+
+  form(method='POST')
+    input(type='hidden', name='petid', value=pet._id)
+    button.btn.btn-primary(type='submit') Remove pet

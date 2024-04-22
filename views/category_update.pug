@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1 #{category_info.name} update:
+
+  form(method='POST')
+    div.form-group
+      label(for='category_name') Change Category Name:
+      input#category_name.form-control(type='text' name='category_name' required value=(undefined===category_info ? 'category undefined' : category_info.name) )
+
+    div(class='update-controls')
+        a(href='/catalog/categories')
+          button.btn.btn-primary(class='btn-danger') Cancel
+        button.btn.btn-primary(type='submit') Update
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg

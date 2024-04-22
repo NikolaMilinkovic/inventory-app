@@ -1,0 +1,49 @@
+//- Head link / script strings
+- let bootstrapCDN = "https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+- let bootstrapIntegrity = "sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+- let jQuerySrc = "https://code.jquery.com/jquery-3.5.1.slim.min.js"
+- let jQueryIntegrity = "sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+- let boostrapCDN2 = "https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+- let bootstrapIntegrity2 = "sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
+
+doctype html
+html(lang='en')
+  head
+    title= title
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel="stylesheet", href=bootstrapCDN, integrity=bootstrapIntegrity, crossorigin="anonymous")
+    script(src=jQuerySrc, integrity=jQueryIntegrity, crossorigin="anonymous")
+    script(src=boostrapCDN2, integrity=bootstrapIntegrity2, crossorigin="anonymous")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/javascripts/nav.js')
+  body
+    div(class='container-fluid')
+      div(class='row')
+        div(class='col-sm-2')
+          block sidebar
+            h4 Browse
+            ul(class='sidebar-nav')
+              li(class='link')
+                a(href='/catalog/items')
+                  button(class='nav-btn') Items 
+              li(class='link')
+                a(href='/catalog/pets')
+                  button(class='nav-btn') Pets
+              li(class='link')
+                a(href='/catalog/categories') 
+                  button(class='nav-btn') Categories
+            hr
+            h4 Create new
+            ul(class='sidebar-nav')
+              li(class='link')
+                a(href='/catalog/items/new-item')  
+                  button(class='nav-btn') New Item
+              li(class='link')
+                a(href='/catalog/pets/new-pet')
+                  button(class='nav-btn') New Pet 
+              li(class='link')
+                a(href='/catalog/categories/new-category')
+                  button(class='nav-btn') New Category
+        div(class='col-sm-10')
+          block content

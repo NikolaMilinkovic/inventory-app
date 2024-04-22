@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1= title 
+  <br>
+
+  if pet_list.length
+    ol(class='pet-container')
+      each pet, index in pet_list 
+        li(class='pet-li')
+          button(class='pet-btn') #{index + 1}. #{pet.name}
+          div(class='margin-left pet-controls') 
+            a(href=pet.url+'/update')
+              button.btn.btn-primary Update
+            form(method='POST', action=`${pet.url}/delete`)
+              a(href=pet.url+'/delete')
+                button.btn.btn-primary(type='submit', class='pet-delete-btn btn-danger') Remove
+      a(href='/catalog/pets/new-pet')
+        button.btn.btn-primary Add new pet
+  else 
+    p There are no pets to display.

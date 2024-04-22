@@ -1,0 +1,11 @@
+extends layout 
+
+block content
+  h1 Create new category
+  <br>
+  form(method="POST")
+    div.form-group
+      label(for='category_name') Category Name:
+      input#category_name.form-control(type='text', placeholder='Food type' name='name' required)
+    div(class='update-controls')
+      button.btn.btn-primary(type='submit') Submit
