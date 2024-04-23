@@ -43,7 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // DATABASE
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
-const mongoDB = process.env.DB_URI;
+const mongoDB = process.env.MONGODB_URI;
 // DATABASE CONNECTION
 main().catch((err) => console.log(err));
 async function main () {
