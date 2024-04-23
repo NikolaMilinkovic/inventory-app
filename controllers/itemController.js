@@ -37,8 +37,6 @@ const [allItems, allPets, allCategories] = await Promise.all([
     pets: allPets,
     categories: allCategories
     })
-
-res.render("item_new");
 })
 
 // Handle Item create new POST
