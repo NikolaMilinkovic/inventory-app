@@ -74,6 +74,18 @@ ul{
 .btn-danger:active{
   scale: 0.95;
 }
+.password-label{
+  text-align: center;
+  align-self: center;
+  justify-self: center;
+  margin: 0px;
+}
+.password-input{
+  font-size: 16px;
+  padding-left: 0.5rem;
+  border: none;
+  background-color: transparent;
+}
 
 /* VIEWS */
 
@@ -122,6 +134,13 @@ ul{
 .pet-update-btn:active,
 .pet-delete-btn:active{
   scale: 0.95;
+}
+.remove-form{
+  display: flex;
+  gap: 1rem;
+}
+.new-pet-btn{
+  width: fit-content;
 }
 /* \PET_LIST */
 

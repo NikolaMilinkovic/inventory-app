@@ -25,20 +25,15 @@ block content
                 each category in item.category 
                   li #{category.name}
           div(class='item-forms')
-            a(href=item.url+'/update', class='a-item-update')
-              button.btn.btn-primary(class='item-update-btn') Update
-            form(method='POST', action=`${item.url}/delete`)
-              a(href=item.url+'/delete', class='a-item-remove')
-                button.btn.btn-primary(type='submit', class='category-delete-btn btn-danger') Remove
+            form(, class='remove-form')
+              label(for="password", class='password-label') Password:
+              input.password(type="password", placeholder='Enter password', required, class='password-input', name='password') 
 
+              a(href=item.url+'/update')
+                button.btn.btn-primary(type='submit', formmethod='GET', formaction=`${item.url}/update?password=${password}`) Update
 
-    //-       button(class='category-btn') #{category.name}
-    //-       div(class='margin-left category-controls') 
-    //-         a(href=category.url+'/update')
-    //-           button.btn.btn-primary Update
-
-    //-   a(href='/catalog/categories/new-category')
-    //-     button.btn.btn-primary Add new category
+              a(href=item.url+'/delete')
+                button.btn.btn-primary(type='submit', class='item-delete-btn btn-danger', formaction=`${item.url}/delete`, formmethod='POST') Remove
   else 
     p There are no items to display. How about adding some?
     a(href='/catalog/items/new-item')

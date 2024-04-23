@@ -20,7 +20,7 @@ router.get('/catalog', function (req, res, next){
 // Renders all pets
 router.get('/pets', pet_controller.pet_list);
 
-// Pet detele button
+// Pet delete button
 router.post('/pet/:id/delete', pet_controller.pet_delete_post);
 
 // Pet update

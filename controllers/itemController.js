@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler')
 const Pet = require("../models/pet");
 const Category = require("../models/category");
 const Item = require("../models/item");
+const User = require('../models/user')
 
 exports.item_list = asyncHandler(async (req, res, next) => {
     
@@ -71,11 +72,18 @@ try {
 
   // Handle Item update GET
   exports.item_update_get = asyncHandler(async (req, res, next) => {
-    const [item, pets, categories ] = await Promise.all([
+    const passwordInput = req.query.password;
+    const [item, pets, categories, users ] = await Promise.all([
         Item.findById(req.params.id).exec(),
         Pet.find().sort({name: 1}).exec(),
         Category.find().sort({name: 1}).exec(),
+        User.find({}, 'password').exec()
     ]);
+    const password = users.map(user => user.password);
+    // Check for password match
+    if(!password.includes(passwordInput)){
+        return res.redirect("/catalog/items");
+  }
 
     if (!item) {
       const err = new Error('Item not found');
@@ -133,7 +141,19 @@ try {
 
 // Handle item delete on POST.
 exports.item_delete_post = asyncHandler(async (req, res, next) => {
-    const item = await Item.findById(req.params.id).exec();
+    const passwordInput = req.body.password;
+    console.log(passwordInput);
+    const [item, users]= await Promise.all([
+        Item.findById(req.params.id).exec(),
+        User.find({}, 'password').exec()
+    ]);
+
+    const password = users.map(user => user.password);
+    console.log(password);
+    // Check for password match
+    if(!password.includes(passwordInput)){
+        return res.redirect("/catalog/items");
+    }
     if (!item) {
         const err = new Error('Item not found');
         err.status = 404;

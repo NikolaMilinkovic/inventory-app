@@ -1,12 +1,12 @@
 const asyncHandler = require('express-async-handler')
 const Pet = require("../models/pet");
+const User = require("../models/user");
 
 
 // Display list of all Pets.
 exports.pet_list = asyncHandler(async (req, res, next) => {
   try {
     const allPets = await Pet.find({}).sort({ name: 1 }).exec();
-    console.log(allPets);
     res.render("pet_list", {
         title: "Pet List",
         pet_list: allPets
@@ -19,7 +19,19 @@ exports.pet_list = asyncHandler(async (req, res, next) => {
 
 // Handle Pet delete on POST.
 exports.pet_delete_post = asyncHandler(async (req, res, next) => {
-  const pet = await Pet.findById(req.params.id).exec();
+  const passwordInput = req.body.password;
+
+  const [pet, users]= await Promise.all([
+    Pet.findById(req.params.id).exec(),
+    User.find({}, 'password').exec()
+  ]); 
+  const password = users.map(user => user.password);
+
+  // Check for password match
+  if(!password.includes(passwordInput)){
+    return res.redirect("/catalog/pets");;
+  }
+
   if (!pet) {
     const err = new Error('Pet not found');
     err.status = 404;
@@ -32,8 +44,19 @@ exports.pet_delete_post = asyncHandler(async (req, res, next) => {
 
 // Handle Pet update GET
 exports.pet_update_get = asyncHandler(async (req, res, next) => {
-  const pet = await Pet.findById(req.params.id).exec();
-  console.log(pet)
+  const passwordInput = req.query.password;
+
+  const [pet, users]= await Promise.all([
+    Pet.findById(req.params.id).exec(),
+    User.find({}, 'password').exec()
+  ]); 
+  const password = users.map(user => user.password);
+
+  // Check for password match
+  if(!password.includes(passwordInput)){
+    return res.redirect("/catalog/pets");
+  }
+
   if (!pet) {
     const err = new Error('Pet not found');
     err.status = 404;

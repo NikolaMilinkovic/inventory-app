@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler')
 const Category = require("../models/category");
+const User = require('../models/user')
 
 // Display list of all categorys.
 exports.category_list = asyncHandler(async (req, res, next) => {
@@ -17,7 +18,17 @@ exports.category_list = asyncHandler(async (req, res, next) => {
   
   // Handle category delete on POST.
   exports.category_delete_post = asyncHandler(async (req, res, next) => {
-    const category = await Category.findById(req.params.id).exec();
+    const passwordInput = req.body.password;
+    const [category, users] = await Promise.all([
+      Category.findById(req.params.id).exec(),
+      User.find({}, 'password').exec()
+    ]) 
+    const password = users.map(user => user.password);
+
+    // Check for password match
+    if(!password.includes(passwordInput)){
+      return res.redirect("/catalog/categories");;
+    }
     if (!category) {
       const err = new Error('category not found');
       err.status = 404;
@@ -30,8 +41,18 @@ exports.category_list = asyncHandler(async (req, res, next) => {
   
   // Handle category update GET
   exports.category_update_get = asyncHandler(async (req, res, next) => {
-    const category = await Category.findById(req.params.id).exec();
-    console.log(category)
+    const passwordInput = req.query.password;
+    const [category, users] = await Promise.all([
+      Category.findById(req.params.id).exec(),
+      User.find({}, 'password').exec()
+    ]) 
+
+    const password = users.map(user => user.password);
+    
+    // Check for password match
+    if(!password.includes(passwordInput)){
+      return res.redirect("/catalog/categories");;
+    }
     if (!category) {
       const err = new Error('Category not found');
       err.status = 404;

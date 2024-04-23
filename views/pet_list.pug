@@ -10,12 +10,18 @@ block content
         li(class='pet-li')
           button(class='pet-btn') #{index + 1}. #{pet.name}
           div(class='margin-left pet-controls') 
-            a(href=pet.url+'/update')
-              button.btn.btn-primary Update
-            form(method='POST', action=`${pet.url}/delete`)
+            form(, class='remove-form')
+              label(for="password", class='password-label') Password:
+              input.password(type="password", placeholder='Enter password', required, class='password-input', name='password') 
+
+              a(href=pet.url+'/update')
+                button.btn.btn-primary(type='submit', formmethod='GET', formaction=`${pet.url}/update?password=${password}`) Update
+
               a(href=pet.url+'/delete')
-                button.btn.btn-primary(type='submit', class='pet-delete-btn btn-danger') Remove
-      a(href='/catalog/pets/new-pet')
+                button.btn.btn-primary(type='submit', class='pet-delete-btn btn-danger', formaction=`${pet.url}/delete`, formmethod='POST') Remove
+
+
+      a(href='/catalog/pets/new-pet', class='new-pet-btn')
         button.btn.btn-primary Add new pet
   else 
     p There are no pets to display.

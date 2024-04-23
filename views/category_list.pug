@@ -10,11 +10,15 @@ block content
         li(class='category-li')
           button(class='category-btn') #{index + 1}. #{category.name}
           div(class='margin-left category-controls') 
-            a(href=category.url+'/update')
-              button.btn.btn-primary Update
-            form(method='POST', action=`${category.url}/delete`)
+            form(, class='remove-form')
+              label(for="password", class='password-label') Password:
+              input.password(type="password", placeholder='Enter password', required, class='password-input', name='password') 
+
+              a(href=category.url+'/update')
+                button.btn.btn-primary(type='submit', formmethod='GET', formaction=`${category.url}/update?password=${password}`) Update
+
               a(href=category.url+'/delete')
-                button.btn.btn-primary(type='submit', class='category-delete-btn btn-danger') Remove
+                button.btn.btn-primary(type='submit', class='category-delete-btn btn-danger', formaction=`${category.url}/delete`, formmethod='POST') Remove
       a(href='/catalog/categories/new-category')
         button.btn.btn-primary Add new category
   else 
