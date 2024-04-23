@@ -142,14 +142,12 @@ try {
 // Handle item delete on POST.
 exports.item_delete_post = asyncHandler(async (req, res, next) => {
     const passwordInput = req.body.password;
-    console.log(passwordInput);
     const [item, users]= await Promise.all([
         Item.findById(req.params.id).exec(),
         User.find({}, 'password').exec()
     ]);
 
     const password = users.map(user => user.password);
-    console.log(password);
     // Check for password match
     if(!password.includes(passwordInput)){
         return res.redirect("/catalog/items");
