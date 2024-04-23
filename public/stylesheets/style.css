@@ -114,7 +114,8 @@ ul{
   border: none;
 }
 .pet-delete-btn,
-.category-delete-btn{
+.category-delete-btn,
+.item-update-btn{
   padding: 1rem;
   border: none;
 }
@@ -124,22 +125,28 @@ ul{
 }
 /* \PET_LIST */
 
+
+
 /* ITEMS */
 .items-container{
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
 }
-.item-content{
-  display: flex;
+div.item-content{
+  display: grid;
+  grid-template-columns: 0.8fr 1fr;
   gap: 1rem;
   width: 100%;
+  overflow: hidden;
+  max-height: 550px;
 }
 .item{
   display: flex;
   flex-direction: column;
   width: 100%;
   max-height: 500px;
+  height: fit-content;
   overflow: hidden;
   border: 2px solid lightgray;
   padding: 1rem 1rem;
@@ -148,13 +155,18 @@ ul{
 .item-informations-container{
   display: flex;
   flex-direction: column;
+  min-width: 150px;
+}
+.placeholder-image-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
 }
 .item-img{
-  width: 250px;
-  height: auto; /* Allows the image to scale proportionally */
-  max-height: 350px;
+  width: 100%;
   object-fit: cover;
+  object-position: center;
 }
 .a-item-remove{
   width: min-content;
@@ -174,7 +186,11 @@ ul{
 }
 .a-item-update{
   height: 100%;
-  width: fit-content;
+  width: max-content;
 }
-
+.price-stock-fields-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
 /* \ITEMS */

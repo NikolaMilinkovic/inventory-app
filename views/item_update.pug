@@ -1,0 +1,58 @@
+extends layout
+
+block content
+  h1 #{item_info.name} update:
+
+  form(method='POST')
+    div.form-group
+      label(for='item_name') Change Name:
+      input#item_name.form-control(type='text' name='item_name' required value=(undefined===item_info.name ? 'Item information not found' : item_info.name) )
+
+    div.form-group
+      label(for='item_description') Description:
+      textarea#item_description.form-control(name='item_description' required)
+        if item_info.description
+          | #{item_info.description}
+        else
+          | Item description not found
+    div(class='price-stock-fields-container')
+      div.form-group
+        label(for='item_price') Price:
+        input#item_price.form-control(type='text' name='item_price' required value=(undefined===item_info.price ? 'Item price not found' : item_info.price) )
+      div.form-group
+        label(for='item_inStock') In Stock:
+        input#item_inStock.form-control(type='text' name='item_inStock' required value=(undefined===item_info.inStock ? 'Item information not found' : item_info.inStock) )
+
+    div.form-group
+      label For pet type:
+      div
+        for pet in pet_info
+          div(style='display: inline; padding-right:10px;')
+            if pet.checked
+              input.checkbox-input(type='checkbox', name='for', id=pet._id, value=pet._id, checked)
+              label(for=pet._id) &nbsp;#{pet.name}
+            else
+              input.checkbox-input(type='checkbox', name='for', id=pet._id, value=pet._id)
+              label(for=pet._id) &nbsp;#{pet.name}
+
+    div.form-group
+      label Category:
+      div
+        for category in category_info
+          div(style='display: inline; padding-right:10px;')
+            if category.checked
+              input.checkbox-input(type='checkbox', name='category', id=category._id, value=category._id, checked)
+              label(for=category._id) &nbsp;#{category.name}
+            else
+              input.checkbox-input(type='checkbox', name='category', id=category._id, value=category._id)
+              label(for=category._id) &nbsp;#{category.name}
+
+    div(class='update-controls')
+        a(href='/catalog/items')
+          button.btn.btn-primary(class='btn-danger') Cancel
+        button.btn.btn-primary(type='submit') Update
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg

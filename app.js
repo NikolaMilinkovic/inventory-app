@@ -34,6 +34,13 @@ async function main () {
 const indexRouter = require('./routes/index');
 const catalogRouter = require('./routes/catalog');
 
+
+app.get('/', (req, res) => {
+  res.redirect('/catalog/items');
+});
+app.get('/catalog', (req, res) => {
+  res.redirect('/catalog/items');
+});
 app.use('/', indexRouter);
 app.use('/catalog', catalogRouter);
 

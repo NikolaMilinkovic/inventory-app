@@ -67,3 +67,79 @@ try {
     return res.status(500).send("An error occurred while saving the category");
 }
 })
+
+
+  // Handle Item update GET
+  exports.item_update_get = asyncHandler(async (req, res, next) => {
+    const [item, pets, categories ] = await Promise.all([
+        Item.findById(req.params.id).exec(),
+        Pet.find().sort({name: 1}).exec(),
+        Category.find().sort({name: 1}).exec(),
+    ]);
+
+    if (!item) {
+      const err = new Error('Item not found');
+      err.status = 404;
+      throw err;
+    }
+
+     // Mark our selected genres as checked.
+    pets.forEach((pet) => {
+        if (item.for.includes(pet._id)) pet.checked = "true";
+    });
+    // Mark our selected genres as checked.
+    categories.forEach((category) => {
+        if (item.category.includes(category._id)) category.checked = "true";
+    });
+  
+    res.render("item_update", {
+      item_info: item,
+      pet_info: pets,
+      category_info: categories
+  });
+  })
+
+  // Handle Item update POST
+  exports.item_update_post = asyncHandler(async (req, res, next) => {
+      const item = await Item.findById(req.params.id).exec();
+      if (!item) {
+        const err = new Error('Item not found');
+        err.status = 404;
+        throw err;
+      }
+
+    // Convert the for checkbox inputs to an array.
+    if (!Array.isArray(req.body.for)) {
+        req.body.for = typeof req.body.for === "undefined" ? [] : [req.body.for];
+    }
+
+    // Convert the category checkbox inputs to an array.
+    if (!Array.isArray(req.body.category)) {
+        req.body.category = typeof req.body.category === "undefined" ? [] : [req.body.category];
+    }
+    
+      // Update the category's name
+      item.name = req.body.item_name;
+      item.description = req.body.item_description;
+      item.price = req.body.item_price;
+      item.inStock = req.body.item_inStock;
+      item.for = req.body.for;
+      item.category = req.body.category;
+      await item.save();
+    
+      res.redirect("/catalog/items");
+  })
+
+
+// Handle item delete on POST.
+exports.item_delete_post = asyncHandler(async (req, res, next) => {
+    const item = await Item.findById(req.params.id).exec();
+    if (!item) {
+        const err = new Error('Item not found');
+        err.status = 404;
+        throw err;
+    }
+    
+    await Item.findByIdAndDelete(req.params.id).exec();
+    res.redirect("/catalog/items");
+    });

@@ -12,6 +12,10 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
+router.get('/catalog', function (req, res, next){
+  res.render('/catalog/items');
+})
+
 //===============================[PET ROUTES]===============================//
 // Renders all pets
 router.get('/pets', pet_controller.pet_list);
@@ -51,17 +55,17 @@ router.post('/categories/new-category', category_controller.category_new_post);
 
 
 //===============================[ITEM ROUTES]===============================//
-// Renders all categories
+// Renders all items
 router.get('/items', item_controller.item_list);
 
-// // Category delete button
-// router.post('/category/:id/delete', category_controller.category_delete_post);
+// // Item delete button
+router.post('/item/:id/delete', item_controller.item_delete_post);
 
-// // Category update
-// router.get('/category/:id/update', category_controller.category_update_get);
-// router.post('/category/:id/update', category_controller.category_update_post);
+// // Item update
+router.get('/item/:id/update', item_controller.item_update_get);
+router.post('/item/:id/update', item_controller.item_update_post);
 
-// // Create new category
+// // Create new item
 router.get('/items/new-item', item_controller.item_new_get);
 router.post('/items/new-item', item_controller.item_new_post);
 
