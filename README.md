@@ -1,8 +1,13 @@
-# Live link:
-- https://lunar-romantic-alto.glitch.me
+# Inventory App
+Inventory application for pet food products.
+This app uses Node.js to serve pages, handle routes and database updates
+It uses MongoDB to store data and pug to display views.
 
-# Node.js Express App
-- This app uses Node.js to serve pages, handle routes and database updates
+[Live Demo](https://lunar-romantic-alto.glitch.me/) ✨
 
-# Database - MongoDB
-- All the data is stored and read from a MongoDB database.
+## Features
+- Product display and ability to edit each item
+- Pages for adding new items / pets / categories
+
+## 💻 Built With
+![javascript](https://skillicons.dev/icons?i=nodejs,pug,express,mongodb,js,css&perline=10)
