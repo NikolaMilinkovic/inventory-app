@@ -1,7 +1,7 @@
 # Inventory App
-Inventory application for pet food products.
-This app uses Node.js to serve pages, handle routes and database updates
-It uses MongoDB to store data and pug to display views.
+Inventory application for pet food products. <br>
+This app uses Node.js to serve pages, handle routes and database updates. <br>
+It uses MongoDB to store data and pug to display views. <br>
 
 [Live Demo](https://lunar-romantic-alto.glitch.me/) ✨
 
